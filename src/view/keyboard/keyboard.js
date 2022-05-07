@@ -37,7 +37,7 @@ export default class Keyboard {
     }
   }
 
-  getKeyboard() {
+  getKeyboardElement() {
     return this.keyboard;
   }
 }
