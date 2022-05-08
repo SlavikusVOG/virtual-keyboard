@@ -1,19 +1,17 @@
-import Keyboard from './view/keyboard/keyboard';
 import './styles/styles.scss';
 import Header from './view/header/header';
-import Textarea from './view/textarea/textarea';
+import Main from './view/main/main';
 import Footer from './view/footer/footer';
 
 const body = document.getElementsByTagName('body')[0];
+const wrapper = body.appendChild(document.createElement('div'));
+wrapper.classList.add('body__wrapper');
 const header = new Header();
 const headerElement = header.getHeaderElement();
-body.appendChild(headerElement);
-const textarea = new Textarea();
-const textareaContainer= textarea.getTextareaContainer();
-body.appendChild(textareaContainer);
-const keyboard = new Keyboard();
-const keyboardElement = keyboard.getKeyboardElement();
-body.appendChild(keyboardElement);
+wrapper.appendChild(headerElement);
+const main = new Main();
+const mainElement = main.getMainElement();
+wrapper.appendChild(mainElement);
 const footer = new Footer();
 const footerElement = footer.getFooterElement();
-body.appendChild(footerElement);
+wrapper.appendChild(footerElement);

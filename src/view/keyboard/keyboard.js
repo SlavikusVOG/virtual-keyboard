@@ -1,9 +1,10 @@
-import constants from '../../const';
+import constants from '../../constants';
 
 export default class Keyboard {
   constructor() {
     this.keyboard = document.createElement('div');
     this.keyboard.classList.add('keyboard');
+    this.keyElementsArray = [];
     for (let rowIndex = 0; rowIndex < constants.LAYOUTS.eng.caseDown.length; rowIndex += 1) {
       const row = this.keyboard.appendChild(document.createElement('div'));
       row.classList.add('keyboard__row');
@@ -14,6 +15,7 @@ export default class Keyboard {
       ) {
         const newButton = row.appendChild(document.createElement('div'));
         newButton.classList.add('keyboard__key', 'key');
+        this.keyElementsArray.push(newButton);
 
         const eng = newButton.appendChild(document.createElement('span'));
         eng.classList.add('eng');
@@ -39,5 +41,9 @@ export default class Keyboard {
 
   getKeyboardElement() {
     return this.keyboard;
+  }
+
+  getKeyElementsArray() {
+    return this.keyElementsArray;
   }
 }

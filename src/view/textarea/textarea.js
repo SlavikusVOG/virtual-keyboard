@@ -8,4 +8,8 @@ export default class Textarea {
   getTextareaContainer() {
     return this.textareaContainer;
   }
+
+  getTextareaElement() {
+    return this.textarea;
+  }
 }
