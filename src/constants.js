@@ -1,8 +1,15 @@
 export default {
-  SHIFT_KEY: 'Shift',
+  L_SHIFT_KEY: 'lShift',
+  R_SHIFT_KEY: 'rShift',
   CTRL_KEY: 'Ctrl',
   WIN_KEY: 'Win',
   ALT_KEY: 'Alt',
+  KEYBOARD_STATE: {
+    caseDown: 'caseDown',
+    caseUp: 'caseUp',
+    caps: 'caps',
+    shiftCaps: 'shiftCaps',
+  },
   LAYOUTS: {
     eng: {
       caseDown: [
