@@ -12,6 +12,17 @@ export default {
     caps: 'caps',
     shiftCaps: 'shiftCaps',
   },
+  LANGS: {
+    eng: 'eng',
+    rus: 'rus',
+  },
+  KEY_NAMES: [
+    ['tilde', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'minus', 'equal', 'Backspace'],
+    ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'openBracket', 'closeBracket', 'slash'],
+    ['Caps Lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'semicolon', 'quote', 'Enter'],
+    ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'colon', 'dot', 'rslash', 'up', 'rShift'],
+    ['Ctrl', 'Win', 'Alt', 'space', 'Alt', 'left', 'down', 'right', 'Ctrl'],
+  ],
   LAYOUTS: {
     eng: {
       caseDown: [

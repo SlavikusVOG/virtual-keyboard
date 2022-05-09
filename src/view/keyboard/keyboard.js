@@ -7,6 +7,7 @@ export default class Keyboard {
     this.capsLockPressed = false;
     this.altPressed = false;
     this.ctrlPressed = false;
+    this.keyBoardLand = constants.LANGS.eng;
     this.keyboard = document.createElement('div');
     this.keyboard.classList.add('keyboard');
     this.keyboardState = constants.KEYBOARD_STATE.caseDown;
@@ -21,6 +22,7 @@ export default class Keyboard {
       ) {
         const newButton = row.appendChild(document.createElement('div'));
         newButton.classList.add('keyboard__key', 'key');
+        newButton.setAttribute(`data-${constants.KEY_NAMES}`);
         this.keyElementsArray.push(newButton);
 
         const layoutsKeys = Object.keys(constants.LAYOUTS);
@@ -81,5 +83,29 @@ export default class Keyboard {
     if (shiftPressed && this.capsLockPressed) {
       this.setKeyboardState(constants.KEYBOARD_STATE.shiftCaps);
     }
+  }
+
+  updateKeyboardElements() {
+    // TODO: implement updateKeyboardElements
+    this.keyElementsArray.forEach((key) => {
+      const { children } = key;
+      children.forEach((lang) => {
+        debugger;
+        lang.forEach((langKey) => {
+          langKey.classList.add('hidden');
+        });
+      });
+      debugger;
+      key.querySelectorAll(`.${this.state}`).forEach((keyToShow) => {
+        keyToShow.classList.remove('hidden');
+      });
+    });
+  }
+
+  switchLanguage() {
+    // TODO: implement switch language
+    this.keyElementsArray.forEach((key) => {
+
+    });
   }
 }

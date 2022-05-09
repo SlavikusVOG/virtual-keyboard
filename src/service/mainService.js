@@ -11,7 +11,10 @@ export default class MainService {
     const textareaElement = this.textarea.getTextareaElement();
     const { keyboard } = this;
     const backspaceEventHandler = () => {
-      textareaElement.value = textareaElement.value.slice(0, -1);
+      const currentCursor = textareaElement.selectionStart;
+      textareaElement.value = `${textareaElement.value.slice(0, currentCursor - 1)}${textareaElement.value.slice(currentCursor)}`;
+      textareaElement.selectionEnd = currentCursor - 1;
+      textareaElement.selectionStart = currentCursor - 1;
     };
 
     const lShiftEventHandler = () => {
@@ -37,6 +40,13 @@ export default class MainService {
     const keyEventHandler = (event) => {
       const keyboardState = keyboard.getKeyboardState();
       const elementTarget = event.target;
+      if (elementTarget.classList.contains(`${keyboardState}`)) {
+        elementTarget.parentElement.parentElement.classList.add('active');
+        setTimeout(elementTarget.parentElement.parentElement.classList.remove('active'), 500);
+      } else {
+        elementTarget.classList.add('active');
+        setTimeout(elementTarget.classList.remove('active'), 500);
+      }
       const keyElement = elementTarget.classList.contains(`${keyboardState}`)
         ? elementTarget
         : elementTarget.querySelector(`.${keyboardState}`);
@@ -45,13 +55,10 @@ export default class MainService {
       const elementKey = keyElement.textContent;
       textareaElement.focus();
       // debugger;
-      // TODO solve problem with keyboardevent.
       const currentCursor = textareaElement.selectionStart;
       textareaElement.value = `${textareaElement.value.slice(0, textareaElement.selectionStart)}${elementKey}${textareaElement.value.slice(textareaElement.selectionStart)}`;
       textareaElement.selectionStart = currentCursor + 1;
       textareaElement.selectionEnd = currentCursor + 1;
-      // textareaElement.dispatchEvent(new KeyboardEvent('keydown', { key: elementKey }));
-      // textareaElement.dispatchEvent(new KeyboardEvent('keyup', { key: elementKey }));
     };
     keysArray.forEach((key) => {
       switch (key.textContent) {

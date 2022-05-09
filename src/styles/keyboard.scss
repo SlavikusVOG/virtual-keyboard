@@ -26,6 +26,10 @@
 			.caseDown, .caseUp, .caps, .shiftCaps {
 				min-height: 40px;
 			}
+			&.active {
+				background-color: #2cfd72;
+				border-radius: 50px
+			}
 		}
 	}
 }
