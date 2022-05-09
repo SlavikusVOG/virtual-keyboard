@@ -6,6 +6,7 @@ export default class Keyboard {
     this.rightShiftKeyPressed = false;
     this.capsLockPressed = false;
     this.altPressed = false;
+    this.ctrlPressed = false;
     this.keyboard = document.createElement('div');
     this.keyboard.classList.add('keyboard');
     this.keyboardState = constants.KEYBOARD_STATE.caseDown;
