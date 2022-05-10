@@ -9,7 +9,10 @@ export default class Keyboard {
     this.rightAltPressed = false;
     this.leftCtrlPressed = false;
     this.rightCtrlPressed = false;
-    this.keyboardLang = constants.LANGS.eng;
+    this.keyboardLang = sessionStorage.getItem('lang')
+      ? sessionStorage.getItem('lang')
+      : constants.LANGS.eng;
+    sessionStorage.setItem('lang', this.keyboardLang);
     this.keyboard = document.createElement('div');
     this.keyboard.classList.add('keyboard');
     this.keyboardState = constants.KEYBOARD_STATE.caseDown;
@@ -53,6 +56,7 @@ export default class Keyboard {
         });
       }
     }
+    this.updateKeyboardElements();
   }
 
   getKeyboardElement() {
@@ -111,8 +115,10 @@ export default class Keyboard {
   switchLanguage() {
     if (this.keyboardLang === constants.LANGS.eng) {
       this.keyboardLang = constants.LANGS.rus;
+      sessionStorage.setItem('lang', constants.LANGS.rus);
     } else {
       this.keyboardLang = constants.LANGS.eng;
+      sessionStorage.setItem('lang', constants.LANGS.eng);
     }
   }
 }
