@@ -23,7 +23,7 @@ export default class Keyboard {
         buttonIndex += 1
       ) {
         const newButton = row.appendChild(document.createElement('div'));
-        newButton.classList.add('keyboard__key', 'key');
+        newButton.classList.add('keyboard__key', 'key', `${constants.KEY_NAMES[rowIndex][buttonIndex]}`);
         newButton.setAttribute('data-key', `${constants.KEY_NAMES[rowIndex][buttonIndex]}`);
         this.keyElementsArray.push(newButton);
 
