@@ -8,6 +8,12 @@ export default {
   R_ALT_KEY: 'AltRight',
   BACKSPACE_KEY: 'Backspace',
   CAPS_LOCK_KEY: 'CapsLock',
+  ENTER_KEY: 'Enter',
+  LEFT_ARROW_KEY: 'ArrowLeft',
+  RIGHT_ARROW_KEY: 'ArrowRight',
+  UP_ARROW_KEY: 'ArrowUp',
+  DOWN_ARROW_KEY: 'ArrowDown',
+  TAB_KEY: 'Tab',
   KEYBOARD_STATE: {
     caseDown: 'caseDown',
     caseUp: 'caseUp',

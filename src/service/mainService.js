@@ -98,8 +98,69 @@ export default class MainService {
     };
 
     this.windowKeyDownEventHandler = (event) => {
+      event.preventDefault();
       const elementKey = document.querySelector(`.keyboard__key[data-key=${event.code}]`);
       elementKey.dispatchEvent(new Event('click'));
+    };
+
+    this.tabKeyHandler = () => {
+      textareaElement.focus();
+      const currentCursor = textareaElement.selectionStart;
+      textareaElement.value = `${textareaElement.value.slice(0, textareaElement.selectionStart)}    ${textareaElement.value.slice(textareaElement.selectionStart)}`;
+      textareaElement.selectionStart = currentCursor + 4;
+      textareaElement.selectionEnd = currentCursor + 4;
+    };
+
+    this.enterKeyHandler = () => {
+      textareaElement.focus();
+      const currentCursor = textareaElement.selectionStart;
+      textareaElement.value = `${textareaElement.value.slice(0, textareaElement.selectionStart)}\n\r${textareaElement.value.slice(textareaElement.selectionStart)}`;
+      textareaElement.selectionStart = currentCursor + 1;
+      textareaElement.selectionEnd = currentCursor + 1;
+    };
+
+    this.arrowKeyHandler = (event) => {
+      const elementTarget = event.currentTarget;
+      textareaElement.focus();
+      const currentCursor = textareaElement.selectionStart;
+      elementTarget.classList.add('active');
+      setTimeout((active) => { elementTarget.classList.remove(active); }, 100, 'active');
+      switch (elementTarget.getAttribute('data-key')) {
+        case constants.LEFT_ARROW_KEY:
+          textareaElement.selectionStart = currentCursor - 1;
+          textareaElement.selectionEnd = currentCursor - 1;
+          break;
+        case constants.RIGHT_ARROW_KEY:
+          textareaElement.selectionStart = currentCursor + 1;
+          textareaElement.selectionEnd = currentCursor + 1;
+          break;
+        default:
+          break;
+      }
+      if (elementTarget.getAttribute('data-key') === constants.UP_ARROW_KEY) {
+        const prevNewLine = textareaElement.value[currentCursor] === '\n'
+          ? textareaElement.value.lastIndexOf('\n', currentCursor - 1)
+          : textareaElement.value.lastIndexOf('\n', currentCursor);
+        const prevPrevNewLine = textareaElement.value.lastIndexOf('\n', prevNewLine - 1);
+        if (prevNewLine === -1) {
+          return;
+        }
+        const newPos = currentCursor - prevNewLine;
+        textareaElement.selectionEnd = newPos + prevPrevNewLine;
+        textareaElement.selectionStart = newPos + prevPrevNewLine;
+      }
+      if (elementTarget.getAttribute('data-key') === constants.DOWN_ARROW_KEY) {
+        const prevLine = textareaElement.value[currentCursor] === '\n'
+          ? textareaElement.value.lastIndexOf('\n', currentCursor - 1)
+          : textareaElement.value.lastIndexOf('\n', currentCursor);
+        const nextLine = textareaElement.value.lastIndexOf('\n', currentCursor + 1);
+        if (nextLine === -1) {
+          return;
+        }
+        const newPos = currentCursor - prevLine;
+        textareaElement.selectionEnd = newPos + nextLine;
+        textareaElement.selectionStart = newPos + nextLine;
+      }
     };
   }
 
@@ -131,7 +192,19 @@ export default class MainService {
         case constants.BACKSPACE_KEY:
           key.addEventListener('click', this.backspaceEventHandler);
           break;
-        // TODO: attach events to arrows, tab, del(optional)
+        // TODO: attach events to arrows, tab, del(optional), enter,
+        case constants.ENTER_KEY:
+          key.addEventListener('click', this.enterKeyHandler);
+          break;
+        case constants.LEFT_ARROW_KEY:
+        case constants.RIGHT_ARROW_KEY:
+        case constants.UP_ARROW_KEY:
+        case constants.DOWN_ARROW_KEY:
+          key.addEventListener('click', this.arrowKeyHandler);
+          break;
+        case constants.TAB_KEY:
+          key.addEventListener('click', this.tabKeyHandler);
+          break;
         default:
           key.addEventListener('click', this.keyEventHandler);
       }
