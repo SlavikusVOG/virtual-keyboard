@@ -18,7 +18,6 @@ export default class MainService {
       this.keyboard.leftShiftKeyPressed = !this.keyboard.leftShiftKeyPressed;
       this.keyboard.updateState();
       this.keyboard.updateKeyboardElements();
-      // const keyboardState = this.keyboard.getKeyboardState();
       const elementTarget = event.currentTarget;
       elementTarget.classList.toggle('active');
       this.keyboard.updateState();
@@ -28,7 +27,6 @@ export default class MainService {
       this.keyboard.rightShiftKeyPressed = !this.keyboard.rightShiftKeyPressed;
       this.keyboard.updateState();
       this.keyboard.updateKeyboardElements();
-      // const keyboardState = this.keyboard.getKeyboardState();
       const elementTarget = event.currentTarget;
       elementTarget.classList.toggle('active');
       this.keyboard.updateState();
@@ -38,7 +36,6 @@ export default class MainService {
       this.keyboard.capsLockPressed = !this.keyboard.capsLockPressed;
       this.keyboard.updateState();
       this.keyboard.updateKeyboardElements();
-      // const keyboardState = this.keyboard.getKeyboardState();
       const elementTarget = event.currentTarget;
       elementTarget.classList.toggle('active');
       this.keyboard.updateState();
@@ -89,15 +86,11 @@ export default class MainService {
       const elementTarget = event.currentTarget;
       elementTarget.classList.add('active');
       setTimeout((active) => { elementTarget.classList.remove(active); }, 100, 'active');
-      // elementTarget.classList.remove('active');
       const keyElement = elementTarget.classList.contains(`${keyboardState}`)
         ? elementTarget
         : elementTarget.querySelector(`.${this.keyboard.keyboardLang} > .${keyboardState}`);
-      console.log(elementTarget);
-      console.log(keyElement);
       const elementKey = keyElement.textContent;
       textareaElement.focus();
-      // debugger;
       const currentCursor = textareaElement.selectionStart;
       textareaElement.value = `${textareaElement.value.slice(0, textareaElement.selectionStart)}${elementKey}${textareaElement.value.slice(textareaElement.selectionStart)}`;
       textareaElement.selectionStart = currentCursor + 1;
@@ -105,8 +98,6 @@ export default class MainService {
     };
 
     this.windowKeyDownEventHandler = (event) => {
-      console.log(event.key);
-      console.log(event.code);
       const elementKey = document.querySelector(`.keyboard__key[data-key=${event.code}]`);
       elementKey.dispatchEvent(new Event('click'));
     };
