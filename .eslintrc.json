@@ -5,7 +5,8 @@
     "globals": {
         "document": "readonly",
         "window": "readonly",
-        "KeyboardEvent": "readonly"
+        "KeyboardEvent": "readonly",
+        "sessionStorage": "readonly"
     },
     "ignorePatterns": [
         "webpack.config.js",
