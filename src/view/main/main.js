@@ -14,6 +14,7 @@ export default class Main {
     this.main.appendChild(keyboardElement);
     const mainService = new MainService(keyboard, textarea);
     mainService.attachEventsToKeys();
+    mainService.attachEventToWindow();
   }
 
   getMainElement() {

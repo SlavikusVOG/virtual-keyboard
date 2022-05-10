@@ -5,9 +5,11 @@ export default class Keyboard {
     this.leftShiftKeyPressed = false;
     this.rightShiftKeyPressed = false;
     this.capsLockPressed = false;
-    this.altPressed = false;
-    this.ctrlPressed = false;
-    this.keyBoardLand = constants.LANGS.eng;
+    this.leftAltPressed = false;
+    this.rightAltPressed = false;
+    this.leftCtrlPressed = false;
+    this.rightCtrlPressed = false;
+    this.keyboardLang = constants.LANGS.eng;
     this.keyboard = document.createElement('div');
     this.keyboard.classList.add('keyboard');
     this.keyboardState = constants.KEYBOARD_STATE.caseDown;
@@ -22,7 +24,7 @@ export default class Keyboard {
       ) {
         const newButton = row.appendChild(document.createElement('div'));
         newButton.classList.add('keyboard__key', 'key');
-        newButton.setAttribute(`data-${constants.KEY_NAMES}`);
+        newButton.setAttribute('data-key', `${constants.KEY_NAMES[rowIndex][buttonIndex]}`);
         this.keyElementsArray.push(newButton);
 
         const layoutsKeys = Object.keys(constants.LAYOUTS);
@@ -88,24 +90,29 @@ export default class Keyboard {
   updateKeyboardElements() {
     // TODO: implement updateKeyboardElements
     this.keyElementsArray.forEach((key) => {
-      const { children } = key;
-      children.forEach((lang) => {
-        debugger;
-        lang.forEach((langKey) => {
+      const langKeys = key.children;
+      Array.from(langKeys).forEach((lang) => {
+        // debugger;
+        lang.classList.add('hidden');
+        if (lang.classList.contains(this.keyboardLang)) {
+          lang.classList.remove('hidden');
+        }
+        Array.from(lang.children).forEach((langKey) => {
           langKey.classList.add('hidden');
         });
       });
-      debugger;
-      key.querySelectorAll(`.${this.state}`).forEach((keyToShow) => {
+      // debugger;
+      Array.from(key.querySelectorAll(`.${this.keyboardState}`)).forEach((keyToShow) => {
         keyToShow.classList.remove('hidden');
       });
     });
   }
 
   switchLanguage() {
-    // TODO: implement switch language
-    this.keyElementsArray.forEach((key) => {
-
-    });
+    if (this.keyboardLang === constants.LANGS.eng) {
+      this.keyboardLang = constants.LANGS.rus;
+    } else {
+      this.keyboardLang = constants.LANGS.eng;
+    }
   }
 }
