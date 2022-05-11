@@ -137,21 +137,35 @@ export default class MainService {
     };
 
     this.windowKeyDownEventHandler = (event) => {
-      event.preventDefault();
-      const elementKey = document.querySelector(`.keyboard__key[data-key=${event.code}]`);
-      elementKey.dispatchEvent(new Event('click'));
+      if (event.code === 'MetaLeft') {
+        const elementKey = document.querySelector(`.keyboard__key[data-key=${event.code}]`);
+        elementKey.classList.add('active');
+        setTimeout((active) => { elementKey.classList.remove(active); }, 100, 'active');
+      } else {
+        event.preventDefault();
+        if (event.code !== '') {
+          const elementKey = document.querySelector(`.keyboard__key[data-key=${event.code}]`);
+          elementKey.dispatchEvent(new Event('click'));
+        }
+      }
     };
 
-    this.tabKeyHandler = () => {
+    this.tabKeyHandler = (event) => {
       textareaElement.focus();
+      const elementTarget = event.currentTarget;
+      elementTarget.classList.add('active');
+      setTimeout((active) => { elementTarget.classList.remove(active); }, 100, 'active');
       const currentCursor = textareaElement.selectionStart;
       textareaElement.value = `${textareaElement.value.slice(0, textareaElement.selectionStart)}    ${textareaElement.value.slice(textareaElement.selectionStart)}`;
       textareaElement.selectionStart = currentCursor + 4;
       textareaElement.selectionEnd = currentCursor + 4;
     };
 
-    this.enterKeyHandler = () => {
+    this.enterKeyHandler = (event) => {
       textareaElement.focus();
+      const elementTarget = event.currentTarget;
+      elementTarget.classList.add('active');
+      setTimeout((active) => { elementTarget.classList.remove(active); }, 100, 'active');
       const currentCursor = textareaElement.selectionStart;
       textareaElement.value = `${textareaElement.value.slice(0, textareaElement.selectionStart)}\n\r${textareaElement.value.slice(textareaElement.selectionStart)}`;
       textareaElement.selectionStart = currentCursor + 1;
@@ -201,6 +215,13 @@ export default class MainService {
         textareaElement.selectionStart = newPos + nextLine;
       }
     };
+
+    this.metaKeyHandler = (event) => {
+      const elementTarget = event.currentTarget;
+      elementTarget.classList.add('active');
+      setTimeout((active) => { elementTarget.classList.remove(active); }, 100, 'active');
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'MetaLeft' }));
+    };
   }
 
   attachEventsToKeys() {
@@ -243,6 +264,9 @@ export default class MainService {
           break;
         case constants.TAB_KEY:
           key.addEventListener('click', this.tabKeyHandler);
+          break;
+        case constants.META_KEY:
+          key.addEventListener('click', this.metaKeyHandler);
           break;
         default:
           key.addEventListener('click', this.keyEventHandler);

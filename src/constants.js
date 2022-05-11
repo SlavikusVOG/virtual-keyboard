@@ -14,6 +14,7 @@ export default {
   UP_ARROW_KEY: 'ArrowUp',
   DOWN_ARROW_KEY: 'ArrowDown',
   TAB_KEY: 'Tab',
+  META_KEY: 'MetaLeft',
   KEYBOARD_STATE: {
     caseDown: 'caseDown',
     caseUp: 'caseUp',
@@ -29,7 +30,7 @@ export default {
     ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash'],
     ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
     ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'NumpadDecimal', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'],
-    ['ControlLeft', 'OSLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
+    ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
   ],
   LAYOUTS: {
     eng: {

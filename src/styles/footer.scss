@@ -1,6 +1,32 @@
+@keyframes pulse {
+  0% {
+    color: red;
+  }
+  25% {
+    color: black;
+  }
+  50% {
+    color: green
+  }
+  75% {
+    color: blue;
+  }
+  100% {
+    color: red;
+  }
+}
+
 footer {
   flex: 0 0 auto;
   display: none;
   justify-content: center;
   max-height: 60px;
+  display: flex;
+  justify-content: center;
+  .footer__footer-data_github {
+    font-size: 30px;
+    text-decoration: none;
+    // color: red;
+    animation: pulse 4s infinite;
+  }
 }
