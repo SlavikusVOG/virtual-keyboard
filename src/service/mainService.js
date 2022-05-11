@@ -6,9 +6,12 @@ export default class MainService {
     this.textarea = textarea;
 
     const textareaElement = this.textarea.getTextareaElement();
-    this.backspaceEventHandler = () => {
+    this.backspaceEventHandler = (event) => {
+      const elementTarget = event.currentTarget;
       textareaElement.focus();
       const currentCursor = textareaElement.selectionStart;
+      elementTarget.classList.add('active');
+      setTimeout((active) => { elementTarget.classList.remove(active); }, 100, 'active');
       textareaElement.value = `${textareaElement.value.slice(0, currentCursor - 1)}${textareaElement.value.slice(currentCursor)}`;
       textareaElement.selectionEnd = currentCursor - 1;
       textareaElement.selectionStart = currentCursor - 1;
@@ -64,6 +67,18 @@ export default class MainService {
       this.keyboard.ctrlPress = !this.keyboard.rightCtrlPress;
       const elementTarget = event.currentTarget;
       elementTarget.classList.toggle('active');
+      if (this.keyboard.leftAltPressed || this.keyboard.rightAltPressed) {
+        this.keyboard.switchLanguage();
+        this.keyboard.updateKeyboardElements();
+        elementTarget.classList.remove('active');
+        const leftAltElement = document.querySelector(`.keyboard__key[data-key=${constants.L_ALT_KEY}]`);
+        leftAltElement.classList.remove('active');
+        const rightAltElement = document.querySelector(`.keyboard__key[data-key=${constants.R_ALT_KEY}]`);
+        rightAltElement.classList.remove('active');
+        this.keyboard.leftAltPressed = false;
+        this.keyboard.rightAltElement = false;
+        this.keyboard.leftCtrlPressed = false;
+      }
       this.keyboard.updateState();
     };
 
@@ -71,6 +86,18 @@ export default class MainService {
       this.keyboard.leftAltPressed = !this.keyboard.leftAltPressed;
       const elementTarget = event.currentTarget;
       elementTarget.classList.toggle('active');
+      if (this.keyboard.leftCtrlPressed || this.keyboard.rightCtrlPressed) {
+        this.keyboard.switchLanguage();
+        this.keyboard.updateKeyboardElements();
+        elementTarget.classList.remove('active');
+        const leftAltElement = document.querySelector(`.keyboard__key[data-key=${constants.L_ALT_KEY}]`);
+        leftAltElement.classList.remove('active');
+        const rightAltElement = document.querySelector(`.keyboard__key[data-key=${constants.R_ALT_KEY}]`);
+        rightAltElement.classList.remove('active');
+        this.keyboard.leftAltPressed = false;
+        this.keyboard.rightAltElement = false;
+        this.keyboard.leftCtrlPressed = false;
+      }
       this.keyboard.updateState();
     };
 
@@ -78,6 +105,18 @@ export default class MainService {
       this.keyboard.rightAltPressed = !this.keyboard.rightAltPressed;
       const elementTarget = event.currentTarget;
       elementTarget.classList.toggle('active');
+      if (this.keyboard.leftCtrlPressed || this.keyboard.rightCtrlPressed) {
+        this.keyboard.switchLanguage();
+        this.keyboard.updateKeyboardElements();
+        elementTarget.classList.remove('active');
+        const leftAltElement = document.querySelector(`.keyboard__key[data-key=${constants.L_ALT_KEY}]`);
+        leftAltElement.classList.remove('active');
+        const rightAltElement = document.querySelector(`.keyboard__key[data-key=${constants.R_ALT_KEY}]`);
+        rightAltElement.classList.remove('active');
+        this.keyboard.leftAltPressed = false;
+        this.keyboard.rightAltElement = false;
+        this.keyboard.leftCtrlPressed = false;
+      }
       this.keyboard.updateState();
     };
 
