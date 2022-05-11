@@ -1,0 +1,48 @@
+.keyboard {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	width: 700px;
+	background-color: #444444;
+	border: 3px solid #2cfd72;
+	.keyboard__row {
+		display:flex;
+		flex-direction: row;
+		justify-content: space-around;
+		margin-bottom: 8px;
+		.keyboard__key {
+			float: left;
+			width: 40px;
+			height: 40px;
+			margin-left: 6px;
+			font-weight: 500;
+			line-height: 40px;
+			text-align: center;
+			color: #000;
+			background: #ffffff;
+			border-radius: 3px;
+			cursor: pointer;
+			user-select: none;
+			transition: border-radius 0.3s, background-color 0.3s;
+			.caseDown, .caseUp, .caps, .shiftCaps {
+				min-height: 40px;
+			}
+			&.active {
+				background-color: #2cfd72;
+				border-radius: 50px
+			}
+			&.Backspace, &.CapsLock, &.ShiftLeft, &.ShiftRight{
+				width: 100px;
+			}
+			&.Tab {
+				width: 80px;
+			}
+			&.Space {
+				width: 290px;
+			}
+			&:hover {
+				background: gray;
+			}
+		}
+	}
+}

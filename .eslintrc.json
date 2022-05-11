@@ -1,0 +1,15 @@
+{
+    "extends": [
+        "airbnb-base"
+    ],
+    "globals": {
+        "document": "readonly",
+        "window": "readonly",
+        "KeyboardEvent": "readonly",
+        "sessionStorage": "readonly"
+    },
+    "ignorePatterns": [
+        "webpack.config.js",
+        "src/index.js"
+    ]
+}
